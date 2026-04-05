@@ -386,10 +386,14 @@ ticket_unlock(volatile ptlock_t* l)
 
 #  include "clh.h"
 
+typedef clh_lock_t ptlock_t;
+#  define LOCK_LOCAL_DATA
+
 #  define INIT_LOCK(lock)				init_alloc_clh((clh_lock_t*) lock)
 #  define DESTROY_LOCK(lock)			
 #  define LOCK(lock)					clh_local_p.my_pred = \
     clh_acquire((volatile struct clh_qnode **) lock, clh_local_p.my_qnode);
+#  define TRYLOCK(lock)					0
 #  define UNLOCK(lock)					clh_local_p.my_qnode = \
     clh_release(clh_local_p.my_qnode, clh_local_p.my_pred);
 /* GLOBAL lock */
@@ -397,6 +401,7 @@ ticket_unlock(volatile ptlock_t* l)
 #  define GL_DESTROY_LOCK(lock)			
 #  define GL_LOCK(lock)					clh_local_p.my_pred = \
     clh_acquire((volatile struct clh_qnode **) lock, clh_local_p.my_qnode);
+#  define GL_TRYLOCK(lock)				0
 #  define GL_UNLOCK(lock)				clh_local_p.my_qnode = \
     clh_release(clh_local_p.my_qnode, clh_local_p.my_pred);
 

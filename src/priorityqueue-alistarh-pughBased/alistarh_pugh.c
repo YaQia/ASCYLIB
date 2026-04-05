@@ -46,7 +46,7 @@ extern ALIGNED(CACHE_LINE_SIZE) unsigned int levelmax;
 #define ALISTARH_MAX_JUMP_CONSTANT		1	//J
 #define ALISTARH_LEVELS_TO_DESCEND		1	//D
 
-unsigned int num_threads; //p
+extern size_t num_threads; //p
 unsigned int starting_height; //H
 unsigned int max_jump_length; //L
 unsigned int cleaner_percentage;

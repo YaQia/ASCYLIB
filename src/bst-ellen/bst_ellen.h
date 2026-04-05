@@ -135,8 +135,8 @@ static inline uint64_t GETFLAG(update_t ptr) {
     return ((uint64_t)ptr) & 3;
 }
 
-static inline uint64_t FLAG(update_t ptr, uint64_t flag) {
-    return (((uint64_t)ptr) & 0xfffffffffffffffc) | flag;
+static inline union info_t *FLAG(update_t ptr, uint64_t flag) {
+    return (union info_t *)((((uint64_t)ptr) & 0xfffffffffffffffc) | flag);
 }
 
 static inline uint64_t UNFLAG(update_t ptr) {

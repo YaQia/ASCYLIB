@@ -239,7 +239,7 @@ queue_optik_delete(queue_t* qu)
 	}
 
       size_t spotm_next = queue_node_set_null(head + hash + 1);
-      if ((CAS_U64(&qu->array[spot], node, spotm_next) == node))
+      if ((CAS_U64(&qu->array[spot], node, (queue_node_t*) spotm_next) == node))
 	{
 	  FAI_U64(&qu->head_n);
 #if GC == 1

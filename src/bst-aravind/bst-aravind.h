@@ -109,16 +109,16 @@ static inline uint64_t GETTAG(volatile node_t* ptr) {
     return ((uint64_t)ptr) & 2;
 }
 
-static inline uint64_t FLAG(node_t* ptr) {
-    return (((uint64_t)ptr)) | 1;
+static inline struct node_t *FLAG(node_t* ptr) {
+    return (struct node_t *)((((uint64_t)ptr)) | 1);
 }
 
 static inline uint64_t TAG(node_t* ptr) {
     return (((uint64_t)ptr)) | 2;
 }
 
-static inline uint64_t UNTAG(node_t* ptr) {
-    return (((uint64_t)ptr) & 0xfffffffffffffffd);
+static inline struct node_t *UNTAG(node_t* ptr) {
+    return (struct node_t *)(((uint64_t)ptr) & 0xfffffffffffffffd);
 }
 
 static inline uint64_t UNFLAG(node_t* ptr) {

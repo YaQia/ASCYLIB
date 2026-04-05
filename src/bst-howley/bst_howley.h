@@ -127,8 +127,8 @@ static inline uint64_t GETFLAG(operation_t* ptr) {
     return ((uint64_t)ptr) & 3;
 }
 
-static inline uint64_t FLAG(operation_t* ptr, uint64_t flag) {
-    return (((uint64_t)ptr) & 0xfffffffffffffffc) | flag;
+static inline union operation_t *FLAG(operation_t* ptr, uint64_t flag) {
+    return (union operation_t *)((((uint64_t)ptr) & 0xfffffffffffffffc) | flag);
 }
 
 static inline uint64_t UNFLAG(operation_t* ptr) {
