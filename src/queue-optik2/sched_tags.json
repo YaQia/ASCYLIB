@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Lock-free enqueue retry loop with CAS on tail->next - high atomic contention"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS for tail->next linking and tail advancement"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for dequeue with retry"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_insert/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Tail and next pointer reads - sequential access"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Head pointer streaming access pattern"
+    }
+  ]
+}

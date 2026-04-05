@@ -1,0 +1,34 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Fraser skiplist search - CAS retry loop for removing marked nodes across levels"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@mark_node_ptrs/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Fraser skiplist mark - CAS retry loop for marking node pointers at all levels"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Fraser skiplist insert - CAS retry loop for linking new node at multiple levels"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@fraser_search/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Fraser skiplist search - intensive multi-level pointer traversal"
+        },
+        {
+            "type": "branch-dense",
+            "query": "@fraser_search/loop[contains=br]/br[first]",
+            "value": 1,
+            "comment": "Fraser skiplist search - multiple conditional branches for mark checking and level navigation"
+        }
+    ]
+}

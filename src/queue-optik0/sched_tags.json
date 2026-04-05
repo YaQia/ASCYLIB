@@ -1,0 +1,28 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "OPTIK tail lock acquisition for enqueue"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/call[func=optik_lock_version_backoff]",
+      "value": 1,
+      "comment": "OPTIK versioned lock with backoff for dequeue - atomic CAS with version validation"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Sequential tail pointer update - streaming write"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Head pointer read and node access - streaming pattern"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Insert traversal loop with OPTIK versioned trylock for optimistic concurrency"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Delete traversal loop with double OPTIK versioned trylock for predecessor and current"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_find/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Find operation traverses linked list sequentially following next pointers"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_insert/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Insert traversal follows linked list and reads version locks"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Delete traversal follows linked list and reads version locks"
+    }
+  ]
+}

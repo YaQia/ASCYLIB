@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@harris_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris hashtable bucket search - CAS retry loop for removing marked nodes"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@harris_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris hashtable insert - CAS retry loop for inserting new node in bucket"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@harris_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris hashtable delete - CAS retry loop for logical deletion mark"
+        },
+        {
+            "type": "compute-dense",
+            "query": "@ht_contains/bb entry/and[first]",
+            "value": "INT",
+            "comment": "Hash computation for bucket selection"
+        }
+    ]
+}

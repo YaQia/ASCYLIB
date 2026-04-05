@@ -1,0 +1,34 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@physical_delete_right/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris optimized list - CAS for physically removing marked node"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@list_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris optimized search - inline physical deletion during traversal"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@harris_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris optimized insert - CAS retry loop for node insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@harris_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Harris optimized delete - CAS retry loop for logical deletion mark"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@list_search/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Harris optimized search - intensive pointer chasing during list traversal"
+        }
+    ]
+}

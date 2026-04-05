@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Herlihy skiplist search - CAS retry loop for removing marked nodes"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Herlihy skiplist insert - CAS retry loop for multi-level node insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_remove/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Herlihy skiplist delete - CAS retry loop for marking and removing nodes"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@fraser_search/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Herlihy skiplist search - multi-level pointer chasing"
+        }
+    ]
+}

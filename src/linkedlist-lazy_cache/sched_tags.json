@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@clh_acquire/loop[contains=load]/load[first]",
+            "value": 1,
+            "comment": "CLH lock acquire - spin-wait loop checking predecessor's locked flag"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@parse_find/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Lazy list find with caching - optimized sequential memory access"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@parse_insert/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Lazy list insert traversal - memory-intensive linked list scan"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@parse_delete/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Lazy list delete traversal - memory-intensive linked list scan"
+        }
+    ]
+}

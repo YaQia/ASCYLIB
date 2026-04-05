@@ -1,0 +1,52 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/call[func=FAI_U64]",
+      "value": 1,
+      "comment": "Fetch-and-increment for tail position in array-based queue"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Spin-wait for slot availability in bounded queue"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Dequeue retry loop with CAS on array slot"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/call[func=CAS_U64]",
+      "value": 1,
+      "comment": "CAS for slot claiming in array-based queue"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_rcu_wait_others/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "RCU quiescent state polling loop"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_resize/loop[contains=call]/call[func=optik_trylock]",
+      "value": 1,
+      "comment": "Resize lock acquisition for queue expansion"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_resize/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Array copy during resize - streaming memory access"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_delete/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Array slot access based on head position - potentially random within array"
+    }
+  ]
+}

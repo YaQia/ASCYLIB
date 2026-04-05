@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@set_contains/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Global lock acquisition for map lookup"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@set_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Global lock acquisition for map insert"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@set_remove/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Global lock acquisition for map remove"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@set_contains/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential array scan for key lookup - streaming access"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@set_insert/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential array scan for insert position - streaming"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@set_remove/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential array scan for key removal - streaming access"
+    }
+  ]
+}

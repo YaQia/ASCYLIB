@@ -1,0 +1,22 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@mstack_treiber_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Treiber stack push - CAS retry loop for updating head pointer in lock-free manner"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@mstack_treiber_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Treiber stack pop - CAS retry loop for updating head pointer in lock-free manner"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@mstack_size/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Stack size traversal - sequential linked list traversal with predictable memory access pattern"
+        }
+    ]
+}

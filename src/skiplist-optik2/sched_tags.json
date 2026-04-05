@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@sl_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Insert uses OPTIK versioned locks for optimistic concurrency at each level"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@sl_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Delete uses OPTIK versioned locks for physical removal at each level"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@sl_optik_search/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Search traverses multiple levels with random access pattern across skiplist"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@sl_optik_left_search/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Left search traverses skiplist levels with random access to next pointers"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@sl_optik_insert/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Node state checks cause frequent branching in concurrent operations"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@get_rand_level/loop[contains=load]/load[first]",
+      "value": "INT",
+      "comment": "Random level generation for new skiplist node height"
+    }
+  ]
+}

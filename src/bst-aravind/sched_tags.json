@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@bst_seek/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Aravind BST search - CAS retry loop for tree traversal"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Aravind BST insert - CAS retry loop for node insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_remove/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Aravind BST delete - CAS retry loop for node deletion"
+        },
+        {
+            "type": "branch-dense",
+            "query": "@bst_seek/loop[contains=br]/br[first]",
+            "value": 1,
+            "comment": "Aravind BST search - complex conditional tree navigation"
+        }
+    ]
+}

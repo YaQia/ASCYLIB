@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/call[func=optik_lock_backoff]",
+      "value": 1,
+      "comment": "OPTIK lock with backoff for tail operations"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/call[func=SWAP_PTR]",
+      "value": 1,
+      "comment": "Atomic swap for overflow queue management"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Spin-wait loop for overflow queue draining"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for dequeue"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Tail pointer and overflow queue updates - streaming"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_optik_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Head pointer streaming reads"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@chm_put/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Put operation uses OPTIK trylock for segment locking"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@chm_rem/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Remove operation uses OPTIK trylock for segment locking"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@chm_get/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Get operation traverses bucket chain without locking"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@chm_put/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Put traverses bucket chain to find insertion point"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@hash/loop[contains=load]/load[first]",
+      "value": "INT",
+      "comment": "Hash function uses bit shift for segment indexing"
+    }
+  ]
+}

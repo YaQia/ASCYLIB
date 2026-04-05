@@ -1,0 +1,16 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@queue_ms_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael-Scott queue enqueue - CAS retry loop for tail->next update"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@queue_ms_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael-Scott queue dequeue - CAS retry loop for head pointer update"
+        }
+    ]
+}

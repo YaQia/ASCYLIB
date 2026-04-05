@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@clh_acquire/loop[contains=load]/load[first]",
+            "value": 1,
+            "comment": "CLH lock acquire - spin-wait loop checking predecessor's locked flag"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@lockc_find/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Global lock optimized list traversal - sequential memory access pattern"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@lockc_insert/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "List traversal during insert operation - memory-intensive linked list scan"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@lockc_delete/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "List traversal during delete operation - memory-intensive linked list scan"
+        }
+    ]
+}

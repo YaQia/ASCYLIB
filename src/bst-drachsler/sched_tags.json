@@ -1,0 +1,58 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@bst_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Insert retry loop with succ_lock acquisition for logical ordering BST"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@bst_remove/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Remove retry loop acquiring succ_lock and tree_lock with validation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@choose_parent/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Parent selection loop with tree_lock acquisition - lock/unlock retry pattern"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@lock_parent/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Parent locking retry loop validating parent pointer and mark status"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@acquire_tree_locks/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Multi-lock acquisition loop using TRYLOCK for deadlock avoidance"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_search/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "BST traversal following left/right child pointers - random memory access"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_contains/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Logical ordering traversal through pred/succ pointers - random access pattern"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@bst_search/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Key comparison branches during tree search - unpredictable based on key distribution"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@remove_from_tree/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Branch on has_two_children flag determining removal strategy"
+    }
+  ]
+}

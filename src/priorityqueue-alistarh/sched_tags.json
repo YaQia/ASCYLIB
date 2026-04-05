@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Alistarh priority queue insert - CAS retry loop for heap insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@alistarh_deleteMin/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Alistarh priority queue deleteMin - CAS retry loop for extracting minimum"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@alistarh_deleteMin/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Alistarh deleteMin - intensive heap traversal with priority comparisons"
+        },
+        {
+            "type": "branch-dense",
+            "query": "@alistarh_deleteMin/loop[contains=br]/br[first]",
+            "value": 1,
+            "comment": "Alistarh deleteMin - complex branching for heap restructuring"
+        }
+    ]
+}

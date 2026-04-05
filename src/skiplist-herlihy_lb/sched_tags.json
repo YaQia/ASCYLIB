@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Insert acquires locks on predecessors at each level for fine-grained synchronization"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Delete acquires locks on predecessors at each level for physical removal"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_search/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Search traverses multiple levels with random access pattern across skiplist"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_left_search/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Left search traverses skiplist levels with random access to next pointers"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@optimistic_insert/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Insert validation checks on marked nodes and next pointers cause frequent branches"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@get_rand_level/loop[contains=load]/load[first]",
+      "value": "INT",
+      "comment": "Random level generation for new skiplist node height"
+    }
+  ]
+}

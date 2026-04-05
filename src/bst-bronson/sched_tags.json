@@ -1,0 +1,58 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@wait_until_not_changing/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Spin-wait loop checking version field for node unlinking/shrinking completion - high contention atomic polling"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@attempt_get/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Optimistic read loop with version validation - atomic version checks during tree traversal"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@attempt_update/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Update retry loop with version-based optimistic concurrency control"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@fix_height_and_rebalance/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Rebalancing loop with per-node lock acquisition for AVL tree maintenance"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_contains/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Tree traversal with pointer chasing through random memory locations"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@attempt_get/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Recursive tree traversal following child pointers - random access pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@update_under_root/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Tree traversal for updates with random memory access through node pointers"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@attempt_update/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Key comparison branches during tree traversal - unpredictable branching based on key distribution"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@node_conditon/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Multiple condition checks for node state (unlink required, rebalance required) - complex branching"
+    }
+  ]
+}

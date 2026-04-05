@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@bst_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Ellen BST search - CAS retry loop for tree restructuring"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Ellen BST insert - CAS retry loop for inserting new node"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Ellen BST delete - CAS retry loop for multi-word CAS deletion"
+        },
+        {
+            "type": "branch-dense",
+            "query": "@bst_search/loop[contains=br]/br[first]",
+            "value": 1,
+            "comment": "Ellen BST search - complex tree traversal with state checks"
+        }
+    ]
+}

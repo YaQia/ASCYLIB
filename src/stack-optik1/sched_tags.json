@@ -1,0 +1,58 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Push retry loop with OPTIK trylock and elimination array"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for push"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS operations on elimination array slots"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Spin-wait loop for elimination array request consumption"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Pop retry loop with OPTIK trylock and elimination"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS for elimination array coordination between push/pop"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/call[func=FAI_U64]",
+      "value": 1,
+      "comment": "Atomic counter for elimination statistics"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_insert/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Elimination array access at random indices"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_delete/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Elimination array traversal - random access pattern"
+    }
+  ]
+}

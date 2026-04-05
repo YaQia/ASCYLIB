@@ -1,0 +1,76 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@get_lock/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Hand-over-hand locking traversal with lock/unlock sequence"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_insert/loop[contains=call]/call[func=GL_LOCK]",
+      "value": 1,
+      "comment": "Global lock acquisition for insert operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_insert/loop[contains=call]/call[func=LOCK]",
+      "value": 1,
+      "comment": "Per-node lock acquisition during insert"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_delete/loop[contains=call]/call[func=GL_LOCK]",
+      "value": 1,
+      "comment": "Global lock for delete operation coordination"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@alistarh_deleteMin/loop[contains=call]/call[func=GL_LOCK]",
+      "value": 1,
+      "comment": "Global lock for priority queue deleteMin"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@alistarh_deleteMin/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Retry loop with node locking for concurrent deleteMin"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_find/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Skip list traversal following next pointers - random access pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_insert/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Skip list level-by-level traversal for insert position"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@alistarh_spray/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Spray operation with random jumps through skip list levels"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@alistarh_deleteMin/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Skip list traversal for minimum element deletion"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@alistarh_deleteMin/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Cleaner vs spray decision branch based on random percentage"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@alistarh_spray/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Level descent and jump decisions during spray operation"
+    }
+  ]
+}

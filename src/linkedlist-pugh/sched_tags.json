@@ -1,0 +1,46 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@search_strong/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Strong search loop with hand-over-hand locking pattern"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@search_strong_cond/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Conditional strong search with hand-over-hand locking"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@list_insert/loop[contains=call]/call[func=search_strong]",
+      "value": 1,
+      "comment": "Insert uses strong search with locking and GL_LOCK for global coordination"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@list_delete/loop[contains=call]/call[func=search_strong]",
+      "value": 1,
+      "comment": "Delete uses strong search with locking plus additional node lock"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@search_weak_left/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Weak left search traverses linked list without locking"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@search_weak_right/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Weak right search traverses linked list without locking"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@list_search/loop[contains=call]/call[func=search_weak_right]",
+      "value": "STREAM",
+      "comment": "Search operation uses lock-free weak traversal"
+    }
+  ]
+}

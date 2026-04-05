@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@set_add_l/loop[contains=call]/call[func=LOCK]",
+      "value": 1,
+      "comment": "Add operation acquires per-node lock using Pugh hand-over-hand protocol"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@set_remove_l/loop[contains=call]/call[func=LOCK]",
+      "value": 1,
+      "comment": "Remove operation acquires per-node lock using Pugh hand-over-hand protocol"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@set_contains_l/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Contains traverses bucket linked list sequentially"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@ht_size/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Size operation iterates through all buckets and their linked lists"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@ht_contains/loop[contains=load]/load[first]",
+      "value": "INT",
+      "comment": "Hash computation uses bitwise AND for bucket index"
+    }
+  ]
+}

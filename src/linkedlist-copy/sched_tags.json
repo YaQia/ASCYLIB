@@ -1,0 +1,46 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@cpy_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Insert acquires global lock before copying array"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@cpy_delete/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Delete acquires global lock before copying array"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@cpy_search/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Search iterates through array linearly checking keys"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@cpy_insert/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Insert copies entire array element by element"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@cpy_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Delete copies array excluding deleted element"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@cpy_insert/loop[contains=store]/load[first]",
+      "value": "INT",
+      "comment": "Insert loop performs integer key comparisons and array copies"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@cpy_delete/loop[contains=store]/load[first]",
+      "value": "INT",
+      "comment": "Delete loop performs integer key comparisons and array copies"
+    }
+  ]
+}

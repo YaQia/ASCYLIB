@@ -1,0 +1,64 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Push retry loop with OPTIK trylock and elimination backoff"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for push operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=SWAP_PTR]",
+      "value": 1,
+      "comment": "Atomic swap for pop elimination array check"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS for push elimination array slot claiming"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Pop retry loop with OPTIK trylock and elimination"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/call[func=SWAP_PTR]",
+      "value": 1,
+      "comment": "Atomic swap for push elimination array check"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS for pop elimination array slot claiming"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Spin-wait for elimination response value"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_insert/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Random spot selection in elimination arrays"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_delete/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Random elimination array access for pop"
+    }
+  ]
+}

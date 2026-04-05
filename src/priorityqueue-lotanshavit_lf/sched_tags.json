@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Lotan-Shavit priority queue insert - CAS retry loop for skiplist-based insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@prioritySL_deleteMin/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Lotan-Shavit deleteMin - CAS retry loop for removing minimum element"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@fraser_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Lotan-Shavit search - CAS retry loop for skiplist traversal"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@fraser_search/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Lotan-Shavit search - multi-level skiplist pointer chasing"
+        }
+    ]
+}

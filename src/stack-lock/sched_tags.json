@@ -1,0 +1,28 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_lock_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Stack lock acquisition for push operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_lock_delete/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Stack lock acquisition for pop operation"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_lock_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Top pointer update - sequential stack access pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_lock_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Top pointer read - sequential stack access"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@optik_map_contains/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Optimistic read with version validation - atomic version check"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optik_map_insert/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for insert operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optik_map_remove/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for remove operation"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_map_contains/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential array scan with optimistic read - streaming"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_map_insert/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Array scan for free slot - streaming access pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optik_map_remove/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Array scan for key to remove - streaming access"
+    }
+  ]
+}

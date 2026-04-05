@@ -1,0 +1,34 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@physical_delete_right/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael linked list - CAS for physically removing marked node"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@list_search/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael list search - inline physical deletion with retry on failure"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@michael_insert/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael list insert - CAS retry loop for node insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@michael_delete/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Michael list delete - CAS retry loop for logical deletion mark"
+        },
+        {
+            "type": "branch-dense",
+            "query": "@list_search/loop[contains=br]/br[first]",
+            "value": 1,
+            "comment": "Michael search loop - multiple branches for validation and retry"
+        }
+    ]
+}

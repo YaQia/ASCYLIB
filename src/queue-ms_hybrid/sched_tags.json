@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_ms_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Tail lock acquisition for enqueue - atomic lock operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_ms_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Lock-free dequeue retry loop with CAS on head pointer - high atomic contention"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_ms_delete/loop[contains=call]/call[func=CAS_PTR]",
+      "value": 1,
+      "comment": "CAS operation for head pointer update in hybrid MS queue"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_ms_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Sequential tail updates - streaming write pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_ms_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential head/tail reads in retry loop - streaming access"
+    }
+  ]
+}

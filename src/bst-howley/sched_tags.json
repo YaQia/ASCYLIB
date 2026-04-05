@@ -1,0 +1,28 @@
+{
+    "labels": [
+        {
+            "type": "atomic-dense",
+            "query": "@bst_find/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Howley BST search - CAS retry loop for lock-free traversal"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_add/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Howley BST insert - CAS retry loop for node insertion"
+        },
+        {
+            "type": "atomic-dense",
+            "query": "@bst_remove/loop[contains=cmpxchg]/cmpxchg[first]",
+            "value": 1,
+            "comment": "Howley BST delete - CAS retry loop for marking and removal"
+        },
+        {
+            "type": "memory-dense",
+            "query": "@bst_find/loop[contains=load]/load[first]",
+            "value": "STREAM",
+            "comment": "Howley BST search - intensive tree traversal with pointer loads"
+        }
+    ]
+}

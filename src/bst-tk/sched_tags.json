@@ -1,0 +1,64 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@bst_tk_delete/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Delete traversal loop reading version-embedded ticket locks for optimistic concurrency"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@bst_tk_insert/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Insert traversal loop with ticket-lock version tracking for validation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@bst_tk_delete/loop[contains=call]/call[func=tl_trylock_version]",
+      "value": 1,
+      "comment": "Atomic ticket-lock trylock with version validation - CAS-based locking"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@bst_tk_delete/loop[contains=call]/call[func=tl_trylock_version_both]",
+      "value": 1,
+      "comment": "Atomic double-direction ticket-lock acquisition for node deletion"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@bst_tk_insert/loop[contains=call]/call[func=tl_trylock_version]",
+      "value": 1,
+      "comment": "Atomic ticket-lock trylock for insert validation - CAS operation"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_tk_find/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Tree traversal following left/right pointers - random memory access pattern"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_tk_delete/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Tree traversal with pointer chasing through node structure"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@bst_tk_insert/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Insert traversal following tree pointers - random access"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@bst_tk_find/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Key comparison branches during tree search - data-dependent branching"
+    },
+    {
+      "type": "branch-dense",
+      "query": "@bst_tk_delete/loop[contains=load]/load[first]",
+      "value": 1,
+      "comment": "Direction and leaf-check branches during delete traversal"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Push retry loop with OPTIK versioned trylock - atomic CAS"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_insert/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for push operation"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Pop retry loop with OPTIK versioned trylock"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@mstack_optik_delete/loop[contains=call]/call[func=optik_trylock_version]",
+      "value": 1,
+      "comment": "OPTIK versioned trylock for pop operation"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Top pointer update - sequential access"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@mstack_optik_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Top pointer read - streaming pattern"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_insert/loop[contains=call]/call[func=get_lock]",
+      "value": 1,
+      "comment": "Insert uses Pugh get_lock pattern for hand-over-hand locking at each level"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@optimistic_delete/loop[contains=call]/call[func=get_lock]",
+      "value": 1,
+      "comment": "Delete uses Pugh get_lock pattern for physical removal at each level"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@get_lock/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "get_lock traverses with hand-over-hand locking until finding insertion point"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_find/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Find traverses multiple levels with random access pattern across skiplist"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@optimistic_insert/loop[contains=load]/load[first]",
+      "value": "RANDOM",
+      "comment": "Insert traverses skiplist levels to find predecessors"
+    },
+    {
+      "type": "compute-dense",
+      "query": "@get_rand_level/loop[contains=load]/load[first]",
+      "value": "INT",
+      "comment": "Random level generation for new skiplist node height"
+    }
+  ]
+}

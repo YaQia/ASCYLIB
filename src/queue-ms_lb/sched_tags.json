@@ -1,0 +1,28 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_ms_insert/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Tail lock acquisition for enqueue operation - atomic lock"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_ms_delete/loop[contains=call]/call[func=LOCK_A]",
+      "value": 1,
+      "comment": "Head lock acquisition for dequeue operation - atomic lock"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_ms_insert/loop[contains=store]/store[first]",
+      "value": "STREAM",
+      "comment": "Sequential tail pointer update and node linking - streaming writes"
+    },
+    {
+      "type": "memory-dense",
+      "query": "@queue_ms_delete/loop[contains=load]/load[first]",
+      "value": "STREAM",
+      "comment": "Sequential head pointer reads and updates - streaming access pattern"
+    }
+  ]
+}

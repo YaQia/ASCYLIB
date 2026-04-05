@@ -1,0 +1,16 @@
+{
+  "labels": [
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_insert/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Enqueue spin loop with OPTIK version-based locking and CAS for tail update"
+    },
+    {
+      "type": "atomic-dense",
+      "query": "@queue_optik_delete/loop[contains=call]/load[first]",
+      "value": 1,
+      "comment": "Dequeue retry loop with OPTIK version-based locking for head removal"
+    }
+  ]
+}
